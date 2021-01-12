@@ -30,19 +30,17 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
         setPageNum(pageNum - 1)
     }
 
-    console.log(showCountry)
-
     return(
         <Flex w="100%" p="50px" bg="#F7F7FF" border="1px solid #707070" borderRadius="28px" direction="column" position="relative">
             <Flex direction="column"> 
                 <Text mb="20px" fontSize="37px" fontWeight="bold" color="#262A41" > All Users</Text>
-                <Text mb="12px" fontSize="sm" color="#262A41"> Filter by</Text>
-                <Flex mb="20px" w="100%" justify="space-between" align="center"> 
+                <Text mb="12px" fontSize="sm" fontWeight="200" color="#262A41"> Filter by</Text>
+                <Flex mb="20px" w="100%" justify="space-between" align="center" fontWeight="600"> 
                     <Box>
-                    <InputGroup size="md" w="100%">
-                    <InputLeftElement color="#262A41" opacity="0.31" children={<Icon as={FiSearch} />} />
-                    <Input border="0px" opacity="0.62" borderRadius="20px" fontSize="sm" bg="#00000029" color="#262A41" placeholder="Find in list" onChange={e => setSearchField(e.target.value)} />
-                    </InputGroup>
+                        <InputGroup size="md" w="100%">
+                        <InputLeftElement color="#262A41" opacity="0.31" children={<Icon as={FiSearch} />} />
+                        <Input border="0px" opacity="0.62" borderRadius="20px" fontSize="sm" bg="#00000029" color="#262A41" placeholder="Find in list" onChange={e => setSearchField(e.target.value)} />
+                        </InputGroup>
                     </Box>
                     <Box>
                         <Select bg="#00000029" fontSize="sm" fontWeight="bold" color="#262A41" borderRadius="20px" onChange={e => setSearchBy(e.target.value)}>
@@ -53,7 +51,7 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
                     </Box>
                     <Box>
                         <Switch display="inline" defaultChecked colorScheme="teal" opacity="0.61" onChange={()=> setShowCountry(!showCountry)} />
-                        <Text display="inline" fontSize="sm" color="#262A41"> Show country </Text>
+                        <Text display="inline" fontSize="sm" color="#262A41" cursor="pointer"> Show country </Text>
                     </Box>
                 </Flex>
             </Flex>
@@ -63,8 +61,9 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
                 }
                 {   showUserProfile && <UserProfile showCountry={showCountry} user={user} setShowUserProfile={setShowUserProfile} /> }
             </Flex>
-            <Flex w="83%" justify="space-between" align="center" position="absolute" bottom="0" mb="15px" >
+            <Flex w="83%" justify="space-between" align="center" position="absolute" bottom="0" mb="15px" fontWeight="600" >
                 <Box> 
+                    <input id="downloadAnchorElem" style={{display:"none"}} />
                     <Button bg={showUserProfile ? "#BABDD1" : "#7946C1"} color="#FFFFFF" _hover={showUserProfile? {bg: "#a8aaba"} : { bg:"#55308a"}} borderRadius="28px" leftIcon={<IoIosCloudDownload />}> Download results </Button>
                 </Box>
                 <Box float="right"> 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Flex, Text, Box, InputGroup, Input, InputLeftElement, HStack, Icon } from "@chakra-ui/react"
 import {FaUsers,FaMale, FaFemale} from "react-icons/fa"
 import {FiSearch} from "react-icons/fi";
@@ -7,45 +7,47 @@ import {filterSearch} from "../utils"
 const Dashboard = (props) => {
 
     const {setFilterBy, setSearchField} = props
+    const [zoomDiv, setZoomDiv] = useState("1") 
 
-    const filterUser = (filterProp) => {
+    const filterUser = (filterProp, id) => {
         setFilterBy(filterProp)
+        setZoomDiv(id)
     }
 
     return(
         <Flex w="50%" p="50px" color="#FFFFFF" direction="column" justify="center" >
             <Box>
-                <Text fontSize="49px" display="inline"> Hello, </Text>
-                <Text fontSize="37px" display="inline"> Emerald</Text>
+                <Text fontSize="49px" display="inline" fontWeight="100"> Hello, </Text>
+                <Text fontSize="37px" display="inline" fontWeight="700"> Emerald</Text>
                 <Box fontSize="16px" mt="20px">
-                    <Text opacity="0.66"> Welcome to your dashboard, kindly sort through the user base</Text>
+                    <Text opacity="0.66" fontWeight="100"> Welcome to your dashboard, kindly sort through the user base</Text>
                 </Box>
             </Box>
             <Box mt="40px">
                 <InputGroup size="lg" w="80%">
                     <InputLeftElement children={<Icon as={FiSearch} />} />
-                    <Input fontSize="sm" opacity="0.7" border="0px" borderRadius="10px"  bg="#3C3F54" color="#FFFFFF" placeholder="Find a user" onChange={e => setSearchField(e.target.value)} />
+                    <Input fontSize="sm" opacity="0.7" border="0px" borderRadius="10px" fontWeight="600" bg="#3C3F54" color="#FFFFFF" placeholder="Find a user" fontWeight="600" onChange={e => setSearchField(e.target.value)} />
                 </InputGroup>
             </Box>
             <Box mt="40px">
-                <Text opacity="0.7" fontSize="22px">
+                <Text opacity="0.7" fontSize="22px" fontWeight="600">
                     Show Users
                 </Text>
-                <HStack mt="40px" spacing="35px" color="#FFFFFF">
-                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_ALL_USERS)}>
-                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#F935A9" justify="center" align="center">
+                <HStack mt="40px" spacing="35px" color="#FFFFFF" fontWeight="500">
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_ALL_USERS, "1")}>
+                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" transform={zoomDiv === "1" ? "scale(1.2,1.2)" : null} transition={ zoomDiv ? "transform 1s ease": null} bg="#F935A9" justify="center" align="center">
                             <Icon w="30px" h="65px" as={FaUsers} />
                         </Flex>
                         <Text opacity="0.7" mt="10px" fontSize="sm" textAlign="center"> All Users </Text>
                     </Box>
-                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_MALE_USERS)}>
-                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#30BBB5" justify="center" align="center">
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_MALE_USERS, "2")}>
+                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" transform={zoomDiv === "2" ? "scale(1.2,1.2)" : null} transition={ zoomDiv ? "transform 1s ease": null} bg="#30BBB5" justify="center" align="center">
                             <Icon w="18px" h="45px" as={FaMale} />
                         </Flex>
                         <Text opacity="0.7" mt="10px" fontSize="sm" textAlign="center"> Male Users </Text>
                     </Box>
-                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_FEMALE_USERS)}>
-                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#7946C1" justify="center" align="center">
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_FEMALE_USERS, "3")}>
+                        <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" transform={zoomDiv === "3" ? "scale(1.2,1.2)" : null} transition={ zoomDiv ? "transform 1s ease": null} bg="#7946C1" justify="center" align="center">
                             <Icon w="18px" h="45px" as={FaFemale} />
                         </Flex>
                         <Text opacity="0.7" mt="10px" fontSize="sm" textAlign="center"> Female Users </Text>

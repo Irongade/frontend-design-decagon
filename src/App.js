@@ -46,13 +46,12 @@ const App = () => {
         } 
         break; 
       default:
-        return null
+        return user
     }
   })
 
   const searchedUsers = filteredUsers.filter(user => {
     const fullName = `${user.name.last} ${user.name.first}`
-    // console.log(fullName)
     switch(searchBy) {
       case searchCriteria.SEARCH_BY_NAME:
         if (fullName.toLowerCase().includes(searchField.toLowerCase())) {
@@ -76,7 +75,7 @@ const App = () => {
 
   return (
 
-    <Flex p="20px" bg="#262A41" justify="center" minHeight="100vh">
+    <Flex p="20px" bg="#262A41" justify="center" minHeight="100vh" fontFamily="Poppins">
       <Dashboard setFilterBy={setFilterBy} setSearchField={setSearchField} />
       <Flex w="50%">
         <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} />
