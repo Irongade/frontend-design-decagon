@@ -4,7 +4,7 @@ import { Flex } from "@chakra-ui/react";
 import Dashboard from "./components/Dashboard"
 import Users from "./components/Users"
 
-import './App.css';
+// import './App.css';
 
 const App = () => {
 
