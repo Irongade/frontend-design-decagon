@@ -1,10 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import { Flex, Text, Box, InputGroup, Input, InputLeftElement, HStack, Icon } from "@chakra-ui/react"
 import {FaUsers,FaMale, FaFemale} from "react-icons/fa"
-import {FiSearch} from "react-icons/fi"
+import {FiSearch} from "react-icons/fi";
+import {filterSearch} from "../utils"
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
+    const {setFilterBy, setSearchField} = props
+
+    const filterUser = (filterProp) => {
+        setFilterBy(filterProp)
+    }
 
     return(
         <Flex w="50%" p="50px" color="#FFFFFF" direction="column" justify="center" >
@@ -18,7 +24,7 @@ const Dashboard = () => {
             <Box mt="40px">
                 <InputGroup size="lg" w="80%">
                     <InputLeftElement children={<Icon as={FiSearch} />} />
-                    <Input fontSize="sm" opacity="0.7" border="0px" borderRadius="10px"  bg="#3C3F54" color="#FFFFFF" placeholder="Find a user" />
+                    <Input fontSize="sm" opacity="0.7" border="0px" borderRadius="10px"  bg="#3C3F54" color="#FFFFFF" placeholder="Find a user" onChange={e => setSearchField(e.target.value)} />
                 </InputGroup>
             </Box>
             <Box mt="40px">
@@ -26,19 +32,19 @@ const Dashboard = () => {
                     Show Users
                 </Text>
                 <HStack mt="40px" spacing="35px" color="#FFFFFF">
-                    <Box>
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_ALL_USERS)}>
                         <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#F935A9" justify="center" align="center">
                             <Icon w="30px" h="65px" as={FaUsers} />
                         </Flex>
                         <Text opacity="0.7" mt="10px" fontSize="sm" textAlign="center"> All Users </Text>
                     </Box>
-                    <Box>
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_MALE_USERS)}>
                         <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#30BBB5" justify="center" align="center">
                             <Icon w="18px" h="45px" as={FaMale} />
                         </Flex>
                         <Text opacity="0.7" mt="10px" fontSize="sm" textAlign="center"> Male Users </Text>
                     </Box>
-                    <Box>
+                    <Box onClick={() => filterUser(filterSearch.FILTER_BY_FEMALE_USERS)}>
                         <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" bg="#7946C1" justify="center" align="center">
                             <Icon w="18px" h="45px" as={FaFemale} />
                         </Flex>

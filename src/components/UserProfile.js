@@ -1,44 +1,55 @@
-import React, {useState} from "react";
+import React from "react";
 import { Flex, Text, Box, Icon, Avatar, IconButton, Tag } from "@chakra-ui/react"
 import {BiEnvelope} from "react-icons/bi"
 import {FiPhoneCall} from "react-icons/fi"
 import {BsArrowLeftShort} from "react-icons/bs"
-import {IoIosPhonePortrait} from "react-icons/io"
+import {IoIosPhonePortrait} from "react-icons/io";
+import {FaFlag} from "react-icons/fa";
 
-const UserProfile = () => {
+const UserProfile = ({user, setShowUserProfile, showCountry}) => {
+    const { name, location, email, cell, picture, registered, phone } = user
 
+    const returnToUsers = () => {
+        setShowUserProfile(false)
+    }
 
     return(
         <>
-            <Flex align="center" mb="20px">
+            <Flex w="20%" align="center" mb="20px" onClick={returnToUsers}>
                 <IconButton mr="5px" size="sm" bg="transparent" color="#30BBB5" opacity="0.61" as={BsArrowLeftShort} />
-                <Text fontSize="sm" color="#262A41"> RESULTS </Text>
+                <Text fontSize="11px" color="#262A41" opacity="0.52"> RESULTS </Text>
             </Flex>
             <Flex direction="row" w="100%" p="10px" >
                 <Flex justify="center" align="flex-start" mr="20px">
-                    <Avatar size="2xl" name="Dan Abrahmov" src="https://bit.ly/dan-abramov" border="3px solid #75D6D1" />
+                    <Avatar size="2xl" name={`${name.last} ${name.first}`} src={picture.large} border="3px solid #75D6D1" />
                 </Flex>
                 <Flex w="100%" direction="column">
-                    <Text fontSize="22px" fontWeight="bold" color="#262A41" mb="10px"> My name is so so and so</Text>
-                    <Text fontSize="sm" color="#262A41" opacity="0.69" mb="10px"> my address </Text>
+                    <Text fontSize="22px" fontWeight="bold" color="#262A41" mb="10px"> {`${name.last} ${name.first}`}</Text>
+                    <Text fontSize="sm" color="#262A41" opacity="0.69" mb="10px"> {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state}`} </Text>
+                     <Box display={showCountry ? "block" : "none"} fontSize="sm"> 
+                        <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#30BBB5" fontSize="sm" color="#262A41" opacity="0.52" > 
+                            <Icon mr="5px" display="inline" as={FaFlag} />
+                            <Text display="inline"> {location.country}</Text>
+                        </Tag>
+                    </Box>
                     <Box>
-                        <Tag mb="10px" p="8px" align="center" borderRadius="18px" bg="#00000029" fontSize="sm" color="#262A41" opacity="0.52" > 
+                        <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#00000029" fontSize="sm" color="#262A41" opacity="0.52" > 
                             <Icon mr="5px" display="inline" as={BiEnvelope} />
-                            <Text display="inline"> email address</Text>
+                            <Text display="inline"> {email} </Text>
                         </Tag>
                     </Box>
                     <Box> 
-                        <Tag bg="rgb(255,0,255, 0.15)" p="8px" borderRadius="18px" mb="10px" fontSize="sm" color="#262A41">
-                            <Text opacity="0.52">  Joined date</Text>
+                        <Tag bg="rgb(255,0,255, 0.15)" p="7px" borderRadius="18px" mb="10px" fontSize="12px" color="#262A41">
+                            <Text opacity="0.52">  {`JOINED: ${registered.date.substring(0,10)}`} </Text>
                         </Tag>
                     </Box>
-                    <Box mb="10px" color="#262A41" opacity="0.52"> 
+                    <Box mb="8px" color="#262A41" opacity="0.52"> 
                         <Icon mr="5px" display="inline" as={FiPhoneCall} />
-                        <Text display="inline"> phone number</Text>
+                        <Text display="inline"> {cell} </Text>
                     </Box>
                     <Box color="#262A41" opacity="0.52">
                         <Icon mr="5px" display="inline" as={IoIosPhonePortrait} />
-                        <Text display="inline"> phone number</Text>
+                        <Text display="inline">  {phone} </Text>
                     </Box>
                 </Flex>
             </Flex>
