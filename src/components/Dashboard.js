@@ -15,7 +15,7 @@ const Dashboard = (props) => {
     }
 
     return(
-        <Flex w="50%" p="50px" color="#FFFFFF" direction="column" justify="center" >
+        <Flex w={["100%","100%","100%","50%"]} p={["10px","10px","10px","50px"]} color="#FFFFFF" direction="column" justify="center" >
             <Box>
                 <Text fontSize="49px" display="inline" fontWeight="100"> Hello, </Text>
                 <Text fontSize="37px" display="inline" fontWeight="700"> Emerald</Text>
@@ -24,7 +24,7 @@ const Dashboard = (props) => {
                 </Box>
             </Box>
             <Box mt="40px">
-                <InputGroup size="lg" w="80%">
+                <InputGroup size="lg" w={["90%","80%"]}>
                     <InputLeftElement children={<Icon as={FiSearch} />} />
                     <Input fontSize="sm" opacity="0.7" border="0px" borderRadius="10px" fontWeight="600" bg="#3C3F54" color="#FFFFFF" placeholder="Find a user" fontWeight="600" onChange={e => setSearchField(e.target.value)} />
                 </InputGroup>
@@ -33,7 +33,7 @@ const Dashboard = (props) => {
                 <Text opacity="0.7" fontSize="22px" fontWeight="600">
                     Show Users
                 </Text>
-                <HStack mt="40px" spacing="35px" color="#FFFFFF" fontWeight="500">
+                <HStack mt="40px" spacing={["20px","20px","20px","35px"]} color="#FFFFFF" fontWeight="500" cursor="pointer">
                     <Box onClick={() => filterUser(filterSearch.FILTER_BY_ALL_USERS, "1")}>
                         <Flex borderRadius="20px" boxShadow="md" w="85px" h="70px" transform={zoomDiv === "1" ? "scale(1.2,1.2)" : null} transition={ zoomDiv ? "transform 1s ease": null} bg="#F935A9" justify="center" align="center">
                             <Icon w="30px" h="65px" as={FaUsers} />

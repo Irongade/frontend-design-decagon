@@ -3,7 +3,7 @@ import { Flex, Text, Box, InputGroup, Input, InputLeftElement, Select, Switch, B
 import {FiSearch} from "react-icons/fi"
 import {IoIosCloudDownload} from "react-icons/io"
 import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from "react-icons/md"
-import UserCardItem from "./UserCardItem";
+import {UserCardItem, UserCardItemSkeleton} from "./UserCardItem";
 import UserProfile from "./UserProfile";
 import {searchCriteria} from "../utils"
 
@@ -31,7 +31,7 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
     }
 
     return(
-        <Flex w="100%" p="50px" bg="#F7F7FF" border="1px solid #707070" borderRadius="28px" direction="column" position="relative">
+        <Flex w="100%" p={["10px","10px","10px","50px"]} pb={["60px", "60px", "60px", "50px"]} bg="#F7F7FF" border="1px solid #707070" borderRadius="28px" direction="column" position="relative">
             <Flex direction="column"> 
                 <Text mb="20px" fontSize="37px" fontWeight="bold" color="#262A41" > All Users</Text>
                 <Text mb="12px" fontSize="sm" fontWeight="200" color="#262A41"> Filter by</Text>
@@ -51,19 +51,25 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
                     </Box>
                     <Box>
                         <Switch display="inline" defaultChecked colorScheme="teal" opacity="0.61" onChange={()=> setShowCountry(!showCountry)} />
-                        <Text display="inline" fontSize="sm" color="#262A41" cursor="pointer"> Show country </Text>
+                        <Text display={["block","inline"]} fontSize="sm" color="#262A41" cursor="pointer"> Show country </Text>
                     </Box>
                 </Flex>
             </Flex>
             <Flex direction="column">
                 {
-                    !showUserProfile && searchedUsers && paginate(searchedUsers, 3, pageNum).map((user, index) => <UserCardItem user={user} setUser={setUser} key={index} showCountry={showCountry} setShowUserProfile={setShowUserProfile} /> )
+                    !showUserProfile && searchedUsers.length < 1 &&  <>
+                    <UserCardItemSkeleton />
+                    <UserCardItemSkeleton />
+                    <UserCardItemSkeleton />
+                    </>
+                }
+                {
+                    !showUserProfile && searchedUsers.length > 1 && paginate(searchedUsers, 3, pageNum).map((user, index) => <UserCardItem user={user} setUser={setUser} key={index} showCountry={showCountry} setShowUserProfile={setShowUserProfile} /> )
                 }
                 {   showUserProfile && <UserProfile showCountry={showCountry} user={user} setShowUserProfile={setShowUserProfile} /> }
             </Flex>
-            <Flex w="83%" justify="space-between" align="center" position="absolute" bottom="0" mb="15px" fontWeight="600" >
+            <Flex w={["93%","93%","93%","83%"]} justify="space-between" align="center" position="absolute" bottom="0" mb="15px" fontWeight="600" >
                 <Box> 
-                    <input id="downloadAnchorElem" style={{display:"none"}} />
                     <Button bg={showUserProfile ? "#BABDD1" : "#7946C1"} color="#FFFFFF" _hover={showUserProfile? {bg: "#a8aaba"} : { bg:"#55308a"}} borderRadius="28px" leftIcon={<IoIosCloudDownload />}> Download results </Button>
                 </Box>
                 <Box float="right"> 

@@ -21,38 +21,42 @@ const UserProfile = ({user, setShowUserProfile, showCountry}) => {
                 <IconButton mr="5px" size="sm" bg="transparent" color="#30BBB5" opacity="0.61" as={BsArrowLeftShort} />
                 <Text  fontSize="11px" color="#262A41" opacity="0.52"> RESULTS </Text>
             </Flex>
-            <Flex direction="row" w="100%" p="10px" >
-                <Flex justify="center" align="flex-start" mr="20px">
+            <Flex direction={["column","column","column","row"]} justify="center" w="100%" p={["5px","5px","5px","10px"]} >
+                <Flex justify="center" align="flex-start" mr={["10px","20px"]}>
                     <Avatar size="2xl" name={`${name.last} ${name.first}`} src={picture.large} border="3px solid #75D6D1" />
                 </Flex>
-                <Flex w="100%" direction="column">
-                    <Text fontSize="22px" fontWeight="bold" color="#262A41" mb="10px"> {`${name.last} ${name.first}`}</Text>
-                    <Text fontSize="sm" fontWeight="200" color="#262A41" opacity="0.69" mb="10px"> {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state}`} </Text>
-                     <Box display={showCountry ? "block" : "none"} fontSize="sm" fontWeight="500"> 
+                <Flex w="100%" justify={["center"]} direction="column">
+                    <Text fontSize="22px" fontWeight="bold" color="#262A41" textAlign={["center", "center", "center", "left"]} mb="10px">
+                         {`${name.last} ${name.first}`}
+                    </Text>
+                    <Text fontSize="sm" fontWeight="200" color="#262A41" opacity="0.69" mb="10px" textAlign={["center", "center", "center", "left"]}>
+                         {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state}`} 
+                    </Text>
+                     <Box display={showCountry ? "flex" : "none"} fontSize="sm" fontWeight="500"> 
                         <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#30BBB5" fontSize="sm" color="#262A41" opacity="0.52" > 
                             <Icon mr="5px" display="inline" as={FaFlag} />
                             <Text display="inline"> {location.country}</Text>
                         </Tag>
                     </Box>
-                    <Box fontWeight="600">
+                    <Flex fontWeight="600" justify={["center", "center", "center", "flex-start"]}>
                         <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#00000029" fontSize="sm" color="#262A41" opacity="0.52" > 
                             <Icon mr="5px" display="inline" as={BiEnvelope} />
                             <Text display="inline"> {email} </Text>
                         </Tag>
-                    </Box>
-                    <Box> 
+                    </Flex>
+                    <Flex justify={["center", "center", "center", "flex-start"]}> 
                         <Tag bg="rgb(255,0,255, 0.15)" p="7px" borderRadius="18px" mb="10px" fontSize="12px" fontWeight="500" color="#262A41">
                             <Text opacity="0.52">  {`JOINED: ${registered.date.substring(0,10)}`} </Text>
                         </Tag>
-                    </Box>
-                    <Box mb="8px" color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52"> 
+                    </Flex>
+                    <Flex mb="8px" color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52" justify={["center", "center", "center", "flex-start"]}> 
                         <Icon mr="5px" display="inline" as={FiPhoneCall} />
                         <Text display="inline"> {cell} </Text>
-                    </Box>
-                    <Box color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52">
+                    </Flex>
+                    <Flex color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52" justify={["center", "center", "center", "flex-start"]}>
                         <Icon mr="5px" display="inline" as={IoIosPhonePortrait} />
                         <Text display="inline">  {phone} </Text>
-                    </Box>
+                    </Flex>
                 </Flex>
             </Flex>
         </Fade>

@@ -18,11 +18,9 @@ const App = () => {
         try {
           const response = await UserService.get("?results=12&exc=login&seed=users")
           if(response.status === 200) {
-            console.log(response.data.results)
             setUsers(response.data.results)
           }
         } catch (err) {
-          console.log(err)
           window.location.reload()
         }
       }
@@ -75,9 +73,9 @@ const App = () => {
 
   return (
 
-    <Flex p="20px" bg="#262A41" justify="center" minHeight="100vh" fontFamily="Poppins">
+    <Flex p={["10px","10px","10px","20px"]} bg="#262A41" justify="center" direction={["column", "column", "column", "row"]} minHeight="100vh" fontFamily="Poppins">
       <Dashboard setFilterBy={setFilterBy} setSearchField={setSearchField} />
-      <Flex w="50%">
+      <Flex w={["100%","100%","100%","50%"]} mt={["20px","20px","20px","0px"]}>
         <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} />
       </Flex>
     </Flex>
