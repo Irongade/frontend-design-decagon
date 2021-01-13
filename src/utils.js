@@ -1,4 +1,4 @@
-export const filterSearch = {
+export const filterCriteria = {
     FILTER_BY_ALL_USERS: "FILTER_BY_ALL_USERS",
     FILTER_BY_MALE_USERS: "FILTER_BY_MALE_USERS",
     FILTER_BY_FEMALE_USERS: "FILTER_BY_FEMALE_USERS",

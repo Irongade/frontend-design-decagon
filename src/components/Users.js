@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import { Flex, Text, Box, InputGroup, Input, InputLeftElement, Select, Switch, Button, Icon, IconButton } from "@chakra-ui/react";
-import {FiSearch} from "react-icons/fi"
+import { Flex, Text, Box, Select, Switch, Button, IconButton } from "@chakra-ui/react";
 import {IoIosCloudDownload} from "react-icons/io"
 import {MdKeyboardArrowLeft,MdKeyboardArrowRight} from "react-icons/md"
 import {UserCardItem, UserCardItemSkeleton} from "./UserCardItem";
+import TextInput from "./TextInput";
 import UserProfile from "./UserProfile";
 import {searchCriteria} from "../utils"
 
-const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
+const Users = ({searchedUsers, setSearchBy, setSearchField, isLoading}) => {
 
     const [pageNum, setPageNum] = useState(0)
     const [user, setUser] = useState(false)
@@ -17,7 +17,6 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
     const paginate = (array, pageSize, pageNumber) => {
         return array.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
       };
-    
 
     const incrementPage = () => {
         if(pageNum < Math.ceil(parseInt(searchedUsers.length) / 3 - 1 )) {
@@ -36,12 +35,16 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
                 <Text mb="20px" fontSize="37px" fontWeight="bold" color="#262A41" > All Users</Text>
                 <Text mb="12px" fontSize="sm" fontWeight="200" color="#262A41"> Filter by</Text>
                 <Flex mb="20px" w="100%" justify="space-between" align="center" fontWeight="600"> 
-                    <Box>
-                        <InputGroup size="md" w="100%">
-                        <InputLeftElement color="#262A41" opacity="0.31" children={<Icon as={FiSearch} />} />
-                        <Input border="0px" opacity="0.62" borderRadius="20px" fontSize="sm" bg="#00000029" color="#262A41" placeholder="Find in list" onChange={e => setSearchField(e.target.value)} />
-                        </InputGroup>
-                    </Box>
+                    <TextInput 
+                        size={"md"} 
+                        width={"100%"} 
+                        searchIconOpacity={"0.31"}
+                        inputOpacity={"0.62"}
+                        borderRadiusValue={"20px"}
+                        bgColor={"#00000029"}
+                        color={"#262A41"}
+                        placeholderValue={"Find in list"}
+                        onChangeFn={e => setSearchField(e.target.value)}   />
                     <Box>
                         <Select bg="#00000029" fontSize="sm" fontWeight="bold" color="#262A41" borderRadius="20px" onChange={e => setSearchBy(e.target.value)}>
                             <option value={searchCriteria.SEARCH_BY_NAME}>Name</option>
@@ -56,16 +59,29 @@ const Users = ({searchedUsers, setSearchBy, setSearchField}) => {
                 </Flex>
             </Flex>
             <Flex direction="column">
+                {/* loading state while users is being fetched */}
                 {
-                    !showUserProfile && searchedUsers.length < 1 &&  <>
-                    <UserCardItemSkeleton />
-                    <UserCardItemSkeleton />
-                    <UserCardItemSkeleton />
+                    !showUserProfile && !isLoading &&  ["skeletonOne","skeletonTwo","skeletonThree"].map((skeleton, index) => <UserCardItemSkeleton key={index} />)
+                }
+
+                {/* display users list */}
+               
+                {
+                    !showUserProfile && isLoading && searchedUsers.length > 0 && paginate(searchedUsers, 3, pageNum).map((user, index) => <UserCardItem user={user} setUser={setUser} key={index} showCountry={showCountry} setShowUserProfile={setShowUserProfile} /> )
+                }
+
+                {/* display message if a user can not be found*/}
+
+                {
+                    !showUserProfile && isLoading && searchedUsers.length < 1 &&  <>
+                    <Flex w="100%" mt="40px" justify="center" >
+                        <Text fontWeight="bold" fontSize="lg" color="#262A41" cursor="pointer">Oops, User not found. </Text>
+                    </Flex>
                     </>
                 }
-                {
-                    !showUserProfile && searchedUsers.length > 1 && paginate(searchedUsers, 3, pageNum).map((user, index) => <UserCardItem user={user} setUser={setUser} key={index} showCountry={showCountry} setShowUserProfile={setShowUserProfile} /> )
-                }
+
+                {/* display user profile */}
+                
                 {   showUserProfile && <UserProfile showCountry={showCountry} user={user} setShowUserProfile={setShowUserProfile} /> }
             </Flex>
             <Flex w={["93%","93%","93%","83%"]} justify="space-between" align="center" position="absolute" bottom="0" mb="15px" fontWeight="600" >

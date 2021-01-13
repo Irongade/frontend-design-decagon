@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Text, Box, Icon, Avatar, IconButton, Tag } from "@chakra-ui/react";
+import { Flex, Text, Icon, Avatar, IconButton, Tag } from "@chakra-ui/react";
 import Fade from 'react-reveal/Fade';
 import {BiEnvelope} from "react-icons/bi"
 import {FiPhoneCall} from "react-icons/fi"
@@ -14,6 +14,41 @@ const UserProfile = ({user, setShowUserProfile, showCountry}) => {
     const returnToUsers = () => {
         setShowUserProfile(false)
     }
+
+    const userProfileTagData = [
+        {
+            display: showCountry ? "flex" : "none",
+            marginBottom: "8px",
+            padding: "5px",
+            bgColor: "#30BBB5",
+            tagOpacity: "0.52",
+            textOpacity: "0.52",
+            fontWeight: "500",
+            fontSize: "sm",
+            iconValue: FaFlag,
+            textValue: location.country
+        },
+        {
+            marginBottom: "8px",
+            padding: "5px",
+            bgColor: "#00000029",
+            tagOpacity: "0.52",
+            textOpacity: "0.52",
+            fontWeight: "600",
+            fontSize: "sm",
+            iconValue: BiEnvelope,
+            textValue: email
+        },  
+        {
+            marginBottom: "10px",
+            padding: "7px",
+            bgColor: "rgb(255,0,255, 0.15)",
+            textOpacity: "0.60",
+            fontWeight: "500",
+            fontSize: "12px",
+            textValue: `JOINED: ${registered.date.substring(0,10)}`
+        },
+    ]
 
     return(
         <Fade bottom>
@@ -32,24 +67,15 @@ const UserProfile = ({user, setShowUserProfile, showCountry}) => {
                     <Text fontSize="sm" fontWeight="200" color="#262A41" opacity="0.69" mb="10px" textAlign={["center", "center", "center", "left"]}>
                          {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state}`} 
                     </Text>
-                     <Box display={showCountry ? "flex" : "none"} fontSize="sm" fontWeight="500"> 
-                        <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#30BBB5" fontSize="sm" color="#262A41" opacity="0.52" > 
-                            <Icon mr="5px" display="inline" as={FaFlag} />
-                            <Text display="inline"> {location.country}</Text>
+                    {
+                        userProfileTagData.map((data, index) => <Flex display={data.display} justify={["center", "center", "center", "flex-start"]}  fontWeight={data.fontWeight}> 
+                        <Tag mb={data.marginBottom} p={data.padding} align="center" borderRadius="18px" bg={data.bgColor} fontSize={data.fontSize} color="#262A41" tagOpacity={data.tagOpacity} > 
+                            <Icon mr="5px" display={data.iconValue ? "inline": "none"} as={data.iconValue} />
+                            <Text opacity={data.textOpacity} display="inline"> {data.textValue}</Text>
                         </Tag>
-                    </Box>
-                    <Flex fontWeight="600" justify={["center", "center", "center", "flex-start"]}>
-                        <Tag mb="8px" p="5px" align="center" borderRadius="18px" bg="#00000029" fontSize="sm" color="#262A41" opacity="0.52" > 
-                            <Icon mr="5px" display="inline" as={BiEnvelope} />
-                            <Text display="inline"> {email} </Text>
-                        </Tag>
-                    </Flex>
-                    <Flex justify={["center", "center", "center", "flex-start"]}> 
-                        <Tag bg="rgb(255,0,255, 0.15)" p="7px" borderRadius="18px" mb="10px" fontSize="12px" fontWeight="500" color="#262A41">
-                            <Text opacity="0.52">  {`JOINED: ${registered.date.substring(0,10)}`} </Text>
-                        </Tag>
-                    </Flex>
-                    <Flex mb="8px" color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52" justify={["center", "center", "center", "flex-start"]}> 
+                    </Flex>)
+                    }
+                        <Flex mb="8px" color="#262A41" fontSize="sm" fontWeight="500" opacity="0.52" justify={["center", "center", "center", "flex-start"]}> 
                         <Icon mr="5px" display="inline" as={FiPhoneCall} />
                         <Text display="inline"> {cell} </Text>
                     </Flex>

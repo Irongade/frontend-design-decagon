@@ -17,7 +17,7 @@ export const UserCardItem = ({user, setShowUserProfile,setUser, showCountry}) =>
 
     return(
         <Fade bottom>
-            <Flex w="100%" mb={["10px","10px","10px","20px"]} p="15px" bg="#FCFCFF" borderRadius="18px" boxShadow="md">
+            <Flex w="100%" mb={["10px","10px","10px","20px"]} p="15px" bg="#FCFCFF" borderRadius="18px" boxShadow="md" _hover={{transform: "scale(1.03,1.03)", transition: "transform 0.8s ease"}}>
                 <Flex justify="center" align="center" mr={["10px","20px"]}>
                     <Avatar border="3px solid #75D6D1" size="lg" name={`${name.last} ${name.first}`} src={picture.medium} />
                 </Flex>

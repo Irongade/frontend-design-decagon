@@ -3,12 +3,13 @@ import UserService from "./services/user-service";
 import { Flex } from "@chakra-ui/react";
 import Dashboard from "./components/Dashboard"
 import Users from "./components/Users"
-import {filterSearch, searchCriteria }from "./utils.js"
+import {filterCriteria, searchCriteria }from "./utils.js"
 
 const App = () => {
 
   const [ users, setUsers] = useState([])
-  const [ filterBy, setFilterBy] = useState(filterSearch.FILTER_BY_ALL_USERS)
+  const [ isLoading, setIsLoading] = useState(false)
+  const [ filterBy, setFilterBy] = useState(filterCriteria.FILTER_BY_ALL_USERS)
   const [ searchBy, setSearchBy] = useState(searchCriteria.SEARCH_BY_NAME)
   const [searchField, setSearchField] = useState("")
 
@@ -16,9 +17,10 @@ const App = () => {
     () => {
       async function fetchUsers() {
         try {
-          const response = await UserService.get("?results=12&exc=login&seed=users")
+          const response = await UserService.get("?results=12&exc=login&seed=user")
           if(response.status === 200) {
             setUsers(response.data.results)
+            setIsLoading(true)
           }
         } catch (err) {
           window.location.reload()
@@ -31,14 +33,14 @@ const App = () => {
 
   const filteredUsers = users.filter(user => {
     switch(filterBy) {
-      case filterSearch.FILTER_BY_ALL_USERS: 
+      case filterCriteria.FILTER_BY_ALL_USERS: 
         return user;
-      case filterSearch.FILTER_BY_MALE_USERS:
+      case filterCriteria.FILTER_BY_MALE_USERS:
         if(user.gender === "male") {
           return user
         } 
         break;
-      case filterSearch.FILTER_BY_FEMALE_USERS:
+      case filterCriteria.FILTER_BY_FEMALE_USERS:
         if(user.gender === "female") {
           return user
         } 
@@ -76,7 +78,7 @@ const App = () => {
     <Flex p={["10px","10px","10px","20px"]} bg="#262A41" justify="center" direction={["column", "column", "column", "row"]} minHeight="100vh" fontFamily="Poppins">
       <Dashboard setFilterBy={setFilterBy} setSearchField={setSearchField} />
       <Flex w={["100%","100%","100%","50%"]} mt={["20px","20px","20px","0px"]}>
-        <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} />
+        <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} isLoading={isLoading} />
       </Flex>
     </Flex>
   );
