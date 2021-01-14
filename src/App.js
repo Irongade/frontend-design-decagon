@@ -78,7 +78,7 @@ const App = () => {
     <Flex p={["10px","10px","10px","20px"]} bg="#262A41" justify="center" direction={["column", "column", "column", "row"]} minHeight="100vh" fontFamily="Poppins">
       <Dashboard setFilterBy={setFilterBy} setSearchField={setSearchField} />
       <Flex w={["100%","100%","100%","50%"]} mt={["20px","20px","20px","0px"]}>
-        <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} isLoading={isLoading} />
+        <Users searchedUsers={searchedUsers} setSearchBy={setSearchBy} setSearchField={setSearchField} isLoading={isLoading} data-testid="usersList" />
       </Flex>
     </Flex>
   );

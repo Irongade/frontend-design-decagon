@@ -47,7 +47,7 @@ const Dashboard = (props) => {
     return(
         <Flex w={["100%","100%","100%","50%"]} p={["10px","10px","10px","50px"]} color="#FFFFFF" direction="column" justify="center" >
             <Box>
-                <Text fontSize="49px" display="inline" fontWeight="100"> Hello, </Text>
+                <Text fontSize="49px" display="inline" fontWeight="100" data-testid="hello"> Hello, </Text>
                 <Text fontSize="37px" display="inline" fontWeight="700"> Emerald</Text>
                 <Box fontSize="16px" mt="20px">
                     <Text opacity="0.66" fontWeight="100"> Welcome to your dashboard, kindly sort through the user base</Text>

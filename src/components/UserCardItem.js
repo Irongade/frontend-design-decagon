@@ -18,21 +18,21 @@ export const UserCardItem = ({user, setShowUserProfile,setUser, showCountry}) =>
     return(
         <Fade bottom>
             <Flex w="100%" mb={["10px","10px","10px","20px"]} p="15px" bg="#FCFCFF" borderRadius="18px" boxShadow="md" _hover={{transform: "scale(1.03,1.03)", transition: "transform 0.8s ease"}}>
-                <Flex justify="center" align="center" mr={["10px","20px"]}>
+                <Flex justify="center" align="center" mr={["10px","20px"]} data-testid="picture">
                     <Avatar border="3px solid #75D6D1" size="lg" name={`${name.last} ${name.first}`} src={picture.medium} />
                 </Flex>
                 <Flex w="100%" direction="column">
-                    <Text mb="5px" fontSize="18px" fontWeight="bold" color="#262A41"> {`${name.last} ${name.first}`}</Text>
-                    <Text fontSize="sm" fontStyle="italic" fontWeight="500" color="#262A41" opacity="0.69" > {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state} `} </Text>
+                    <Text mb="5px" fontSize="18px" fontWeight="bold" color="#262A41" data-testid="name"> {`${name.last} ${name.first}`}</Text>
+                    <Text fontSize="sm" fontStyle="italic" fontWeight="500" color="#262A41" opacity="0.69" data-testid="location"> {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state} `} </Text>
                     {/* For flag, Maybe */}
-                    <Flex display={showCountry ? "block" : "none"} align="center" fontSize="sm" fontWeight="500" color="#BABDD1"> 
+                    <Flex display={showCountry ? "block" : "none"} align="center" fontSize="sm" fontWeight="500" color="#BABDD1" data-testid="country"> 
                             <Icon mr="5px" display="inline" as={FaFlag} />
                             <Text display="inline"> {location.country}</Text>
                     </Flex>
                     <Flex justify="space-between" align={["flex-start","flex-start","flex-start","center"]} direction={["column","column","column", "row"]} fontWeight="500" color="#BABDD1"> 
                         <Box fontSize="sm"> 
                             <Icon display="inline" as={BiEnvelope} />
-                            <Text display="inline"> {email} </Text>
+                            <Text display="inline" > {email} </Text>
                         </Box>
                         <Box fontSize="sm"> 
                             <Icon display="inline" as={FiPhoneCall} />

@@ -32,7 +32,7 @@ const Users = ({searchedUsers, setSearchBy, setSearchField, isLoading}) => {
     return(
         <Flex w="100%" p={["10px","10px","10px","50px"]} pb={["60px", "60px", "60px", "50px"]} bg="#F7F7FF" border="1px solid #707070" borderRadius="28px" direction="column" position="relative">
             <Flex direction="column"> 
-                <Text mb="20px" fontSize="37px" fontWeight="bold" color="#262A41" > All Users</Text>
+                <Text mb="20px" fontSize="37px" fontWeight="bold" color="#262A41" data-testid="allUsers"> All Users</Text>
                 <Text mb="12px" fontSize="sm" fontWeight="200" color="#262A41"> Filter by</Text>
                 <Flex mb="20px" w="100%" justify="space-between" align="center" fontWeight="600"> 
                     <TextInput 

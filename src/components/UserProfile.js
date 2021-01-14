@@ -61,7 +61,7 @@ const UserProfile = ({user, setShowUserProfile, showCountry}) => {
                     <Avatar size="2xl" name={`${name.last} ${name.first}`} src={picture.large} border="3px solid #75D6D1" />
                 </Flex>
                 <Flex w="100%" justify={["center"]} direction="column">
-                    <Text fontSize="22px" fontWeight="bold" color="#262A41" textAlign={["center", "center", "center", "left"]} mb="10px">
+                    <Text fontSize="22px" fontWeight="bold" color="#262A41" textAlign={["center", "center", "center", "left"]} mb="10px" data-testid="user-name">
                          {`${name.last} ${name.first}`}
                     </Text>
                     <Text fontSize="sm" fontWeight="200" color="#262A41" opacity="0.69" mb="10px" textAlign={["center", "center", "center", "left"]}>
