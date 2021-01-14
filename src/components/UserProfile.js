@@ -68,7 +68,7 @@ const UserProfile = ({user, setShowUserProfile, showCountry}) => {
                          {`${location.street.number} ${location.street.name}, ${location.city}, ${location.state}`} 
                     </Text>
                     {
-                        userProfileTagData.map((data, index) => <Flex display={data.display} justify={["center", "center", "center", "flex-start"]}  fontWeight={data.fontWeight}> 
+                        userProfileTagData.map((data, index) => <Flex key={index} display={data.display} justify={["center", "center", "center", "flex-start"]}  fontWeight={data.fontWeight}> 
                         <Tag mb={data.marginBottom} p={data.padding} align="center" borderRadius="18px" bg={data.bgColor} fontSize={data.fontSize} color="#262A41" tagOpacity={data.tagOpacity} > 
                             <Icon mr="5px" display={data.iconValue ? "inline": "none"} as={data.iconValue} />
                             <Text opacity={data.textOpacity} display="inline"> {data.textValue}</Text>
