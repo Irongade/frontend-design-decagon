@@ -29,8 +29,8 @@ const testUser = {
 const testFn = () => "Testing..."
 
  
-describe('App', () => {
-  test('renders App component', () => {
+describe('User profile', () => {
+  test('renders User profilecomponent', () => {
     render(
         <UserProfile user={testUser} setShowUserProfile={testFn} showCountry={false} />
     );

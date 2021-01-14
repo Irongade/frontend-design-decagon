@@ -5,7 +5,7 @@ import Users from '../components/Users';
 
 const testFn = () => "Testing..."
  
-describe('App', () => {
+describe('Users', () => {
   test('renders Users component', () => {
     render(<Users searchedUsers={testFn} setSearchBy={testFn} setSearchField={testFn} isLoading={false} />);
   });

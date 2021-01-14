@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
  
-import {UserCardItem} from '../components/UserCardItem';
+import {UserCardItem, UserCardItemSkeleton} from '../components/UserCardItem';
 
 const testUser = {
     name: {
@@ -24,8 +24,12 @@ const testUser = {
 
 const testFn = () => "Testing..."
 
-describe('App', () => {
-  test('renders App component', () => {
+describe('User Card', () => {
+  test('renders user card component', () => {
     render(<UserCardItem user={testUser} setShowUserProfile={testFn} setUser={testFn} showCountry={true}  />); 
+  });
+
+  test('renders user card item component', () => {
+    render(<UserCardItemSkeleton />); 
   });
 });
