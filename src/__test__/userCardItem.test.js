@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
  
-import {UserCardItem, UserCardItemSkeleton} from '../components/UserCardItem';
+import {UserCardItem} from '../components/UserCardItem';
 
 const testUser = {
     name: {
@@ -27,9 +27,5 @@ const testFn = () => "Testing..."
 describe('User Card', () => {
   test('renders user card component', () => {
     render(<UserCardItem user={testUser} setShowUserProfile={testFn} setUser={testFn} showCountry={true}  />); 
-  });
-
-  test('renders user card item component', () => {
-    render(<UserCardItemSkeleton />); 
   });
 });

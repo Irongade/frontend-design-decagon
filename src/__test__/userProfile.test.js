@@ -30,7 +30,7 @@ const testFn = () => "Testing..."
 
  
 describe('User profile', () => {
-  test('renders User profilecomponent', () => {
+  test('renders User profile component', () => {
     render(
         <UserProfile user={testUser} setShowUserProfile={testFn} showCountry={false} />
     );
