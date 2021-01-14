@@ -1,3 +1,5 @@
+https://img.shields.io/badge/Tests-Passing-brightgreen
+
 ### Link <br/>
 the link to the deployed site - https://get-users-77249.web.app/
 
